@@ -1,0 +1,183 @@
+{
+  "displayName": "SingleStore Integration",
+  "name": "singlestore-integration",
+  "description": "SingleStore Integration for Dataloop",
+  "scope": "project",
+  "version": "0.0.1",
+  "attributes": {
+    "Provider": "SingleStore",
+    "Category": "Application",
+    "Deployed By": "SingleStore",
+    "Media Type": ["Text"],
+    "Application Type": ["Pipeline Node"]
+  },
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/integrations-singlestore",
+    "gitTag": "0.0.1"
+  },
+
+  "components": {
+    "pipelineNodes": [
+      {
+        "invoke": {
+          "type": "function",
+          "namespace": "singlestore-integ-service.singlestore-integ-module.table_to_dataloop"
+        },
+        "name": "Import SingleStore",
+        "categories": ["SingleStore"],
+        "displayName": "Import SingleStore",
+        "description": "Import SingleStore Table into Dataloop",
+        "scope": "project",
+        "configuration": {
+          "fields": [
+            {
+              "name": "name",
+              "title": "Node Name",
+              "props": {
+                "title": true,
+                "type": "string",
+                "default": "Import SingleStore",
+                "required": true,
+                "placeholder": "Insert node name"
+              },
+              "rules": [
+                {
+                  "type": "required",
+                  "effect": "error"
+                }
+              ],
+              "widget": "dl-input"
+            }
+          ]
+        }
+      },
+      {
+        "invoke": {
+          "type": "function",
+          "namespace": "singlestore-integ-service.singlestore-integ-module.update_table"
+        },
+        "name": "Export SingleStore",
+        "categories": ["SingleStore"],
+        "displayName": "Export SingleStore",
+        "description": "Export Dataloop Best Response to SingleStore",
+        "scope": "project",
+        "configuration": {
+          "fields": [
+            {
+              "name": "name",
+              "title": "Node Name",
+              "props": {
+                "title": true,
+                "type": "string",
+                "default": "Export SingleStore",
+                "required": true,
+                "placeholder": "Insert node name"
+              },
+              "rules": [
+                {
+                  "type": "required",
+                  "effect": "error"
+                }
+              ],
+              "widget": "dl-input"
+            }
+          ]
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "singlestore-integ-module",
+        "entryPoint": "nodes/import_export/singlestore_base.py",
+        "computeConfig": "singlestore-integ-service",
+        "className": "SingleStoreBase",
+        "integrations": ["dl-singlestore-password"],
+        "functions": [
+          {
+            "name": "table_to_dataloop",
+            "input": [
+              {
+                "type": "String",
+                "name": "host"
+              },
+              {
+                "type": "String",
+                "name": "user"
+              },
+              {
+                "type": "String",
+                "name": "database"
+              },
+              {
+                "type": "String",
+                "name": "table_name"
+              },
+              {
+                "type": "String",
+                "name": "dataset_id"
+              }
+            ],
+            "output": [
+              {
+                "type": "Item[]",
+                "name": "items"
+              }
+            ],
+            "displayIcon": "icon-dl-singlestore"
+          },
+          {
+            "name": "update_table",
+            "input": [
+              {
+                "type": "Item",
+                "name": "item"
+              },
+              {
+                "type": "String",
+                "name": "host"
+              },
+              {
+                "type": "String",
+                "name": "user"
+              },
+              {
+                "type": "String",
+                "name": "database"
+              },
+              {
+                "type": "String",
+                "name": "table_name"
+              }
+            ],
+            "output": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "displayIcon": "icon-dl-singlestore"
+          }
+        ]
+      }
+    ],
+    "computeConfigs": [
+      {
+        "name": "singlestore-integ-service",
+        "moduleName": "singlestore-integ-module",
+        "runtime": {
+          "podType": "regular-xs",
+          "runnerImage": "gcr.io/viewo-g/piper/agent/cpu/singlestore-integrations:0.0.1",
+          "numReplicas": 1,
+          "concurrency": 10,
+          "autoscaler": {
+            "type": "rabbitmq",
+            "minReplicas": 0,
+            "maxReplicas": 2,
+            "queueLength": 10
+          }
+        }
+      }
+    ]
+  }
+}
