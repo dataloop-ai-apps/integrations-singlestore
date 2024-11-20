@@ -65,7 +65,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
 
         prompt_items = []
         for row in rows:
-            prompt_item = dl.PromptItem(name=str(rows["id"]))
+            prompt_item = dl.PromptItem(name=str(row["id"]))
             prompt_item.add(
                 message={
                     "role": "user",
