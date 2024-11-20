@@ -143,13 +143,6 @@ class SingleStoreBase(dl.BaseServiceRunner):
                     update_query, (best_response, int(prompt_item.name[:-5]))
                 )
                 connection.commit()
-        self.logger.info(
-            "Updating table '%s' for item with ID '%s' with response: %s",
-            table_name,
-            item.id,
-            best_response,
-        )
-        cursor.execute(update_query, (best_response, int(prompt_item.name[:-5])))
 
         self.logger.info(
             "Successfully updated table '%s' for item with ID '%s'.",
