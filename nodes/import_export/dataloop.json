@@ -3,7 +3,7 @@
   "name": "singlestore-integration",
   "description": "SingleStore Integration for Dataloop",
   "scope": "project",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "attributes": {
     "Provider": "SingleStore",
     "Category": "Application",
@@ -14,7 +14,7 @@
   "codebase": {
     "type": "git",
     "gitUrl": "https://github.com/dataloop-ai-apps/integrations-singlestore",
-    "gitTag": "0.0.2"
+    "gitTag": "0.0.3"
   },
 
   "components": {
