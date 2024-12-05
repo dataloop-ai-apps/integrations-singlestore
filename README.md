@@ -29,3 +29,9 @@ To set up the integration, you'll need the following information:
 
 - **Export SingleStore**
   - This node takes the response marked as the best and updates the corresponding SingleStore table row with the response, model name and id from Dataloop.
+
+## Acknowledgments
+
+This project uses the following open-source software:
+
+- [PyMySQL](https://github.com/PyMySQL/PyMySQL): A pure Python MySQL client library. Licensed under the [MIT License](https://opensource.org/licenses/MIT).
