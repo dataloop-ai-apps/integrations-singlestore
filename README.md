@@ -29,3 +29,9 @@ To set up the integration, you'll need the following information:
 
 - **Export SingleStore**
   - This node takes the response marked as the best and updates the corresponding SingleStore table row with the response, model name and id from Dataloop.
+
+## Acknowledgments
+
+This project makes use of the following open-source software:
+
+- **[PyMongo](https://github.com/mongodb/mongo-python-driver)**: The MongoDB Python driver, distributed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0). PyMongo provides tools for interacting with MongoDB in Python. For more information about PyMongo, visit its [documentation](https://pymongo.readthedocs.io/) or [GitHub repository](https://github.com/mongodb/mongo-python-driver).

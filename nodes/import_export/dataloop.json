@@ -8,6 +8,7 @@
     "Provider": "SingleStore",
     "Category": "Application",
     "Deployed By": "SingleStore",
+    "License": "MIT",
     "Media Type": ["Text"],
     "Application Type": ["Pipeline Node"]
   },
