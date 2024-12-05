@@ -32,6 +32,6 @@ To set up the integration, you'll need the following information:
 
 ## Acknowledgments
 
-This project makes use of the following open-source software:
+This project uses the following open-source software:
 
-- **[PyMongo](https://github.com/mongodb/mongo-python-driver)**: The MongoDB Python driver, distributed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0). PyMongo provides tools for interacting with MongoDB in Python. For more information about PyMongo, visit its [documentation](https://pymongo.readthedocs.io/) or [GitHub repository](https://github.com/mongodb/mongo-python-driver).
+- [PyMySQL](https://github.com/PyMySQL/PyMySQL): A pure Python MySQL client library. Licensed under the [MIT License](https://opensource.org/licenses/MIT).
