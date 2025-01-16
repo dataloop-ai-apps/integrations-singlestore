@@ -125,7 +125,7 @@
                 "name": "items"
               }
             ],
-            "displayIcon": "icon-dl-singlestore-white"
+            "displayIcon": "icon-dl-singlestore"
           },
           {
             "name": "update_table",
@@ -157,7 +157,7 @@
                 "name": "item"
               }
             ],
-            "displayIcon": "icon-dl-singlestore-white"
+            "displayIcon": "icon-dl-singlestore"
           }
         ]
       }
