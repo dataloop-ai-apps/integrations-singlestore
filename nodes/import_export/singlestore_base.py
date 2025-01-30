@@ -76,8 +76,8 @@ class SingleStoreBase(dl.BaseServiceRunner):
             )
             prompt_items.append(prompt_item)
 
-        # Upload PromptItems to Dataloop
-        items = list(dataset.items.upload(local_path=prompt_items, overwrite=True))
+        items = dataset.items.upload(local_path=prompt_items, overwrite=True, return_as_list=True, raise_on_error=True)
+
         self.logger.info(
             "Successfully uploaded %d items to dataset '%s'.", len(items), dataset_id
         )
