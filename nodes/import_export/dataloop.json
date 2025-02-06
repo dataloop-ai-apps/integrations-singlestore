@@ -168,7 +168,7 @@
         "moduleName": "singlestore-integ-module",
         "runtime": {
           "podType": "regular-xs",
-          "runnerImage": "gcr.io/viewo-g/piper/agent/cpu/singlestore-integrations:0.0.1",
+          "runnerImage": "gcr.io/viewo-g/piper/agent/cpu/singlestore-integrations:0.0.2",
           "numReplicas": 1,
           "concurrency": 10,
           "autoscaler": {
