@@ -58,7 +58,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
             "database": database,
             "conn_attrs": {
                 "program_name": "SingleStore Integration",
-                "version": "0.0.6",
+                "version": "0.0.7",
                 "provider": "Dataloop"
             },
             'results_type': 'dict' 
@@ -66,7 +66,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
         with s2.connect(**db_config) as connection:
             with connection.cursor() as cursor:
                 cursor.execute(query)
-                rows = cursor.fetchall()§
+                rows = cursor.fetchall()
 
         prompt_items = []
         for row in rows:
@@ -138,7 +138,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
             "database": database,
             "conn_attrs": {
                 "program_name": "SingleStore Integration",
-                "version": "0.0.6",
+                "version": "0.0.7",
                 "provider": "Dataloop"
             }
         }
