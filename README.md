@@ -34,4 +34,4 @@ To set up the integration, you'll need the following information:
 
 This project uses the following open-source software:
 
-- [PyMySQL](https://github.com/PyMySQL/PyMySQL): A pure Python MySQL client library. Licensed under the [MIT License](https://opensource.org/licenses/MIT).
+- [SingleStoreDB](https://github.com/singlestore-labs/singlestoredb-python): A pure Python SingleStore client library. Licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).

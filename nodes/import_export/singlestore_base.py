@@ -1,8 +1,7 @@
 import os
 import logging
 import dtlpy as dl
-import pymysql
-from pymysql.cursors import DictCursor
+import singlestoredb as s2
 
 logger = logging.getLogger(name="singlestore-connect")
 
@@ -38,7 +37,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
         """
 
         self.logger.info(
-            "Creating table for dataset '%s' and table '%s'.", dataset_id, table_name
+            "Creating table for dataset '{}' and table '{}'.".format(dataset_id, table_name)
         )
 
         try:
@@ -49,7 +48,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
             raise e
 
         # Execute query to fetch data
-        query = f"SELECT * FROM {table_name}"
+        query = "SELECT * FROM {}".format(table_name)
 
         db_config = {
             "host": host,
@@ -57,11 +56,17 @@ class SingleStoreBase(dl.BaseServiceRunner):
             "user": user,
             "password": os.environ.get("SINGLESTORE_PASSWORD"),
             "database": database,
+            "conn_attrs": {
+                "program_name": "SingleStore Integration",
+                "version": "0.0.6",
+                "provider": "Dataloop"
+            },
+            'results_type': 'dict' 
         }
-        with pymysql.connect(**db_config) as connection:
-            with connection.cursor(DictCursor) as cursor:
+        with s2.connect(**db_config) as connection:
+            with connection.cursor() as cursor:
                 cursor.execute(query)
-                rows = cursor.fetchall()
+                rows = cursor.fetchall()§
 
         prompt_items = []
         for row in rows:
@@ -76,10 +81,10 @@ class SingleStoreBase(dl.BaseServiceRunner):
             )
             prompt_items.append(prompt_item)
 
-        # Upload PromptItems to Dataloop
-        items = list(dataset.items.upload(local_path=prompt_items, overwrite=True))
+        items = dataset.items.upload(local_path=prompt_items, overwrite=True, return_as_list=True, raise_on_error=True)
+
         self.logger.info(
-            "Successfully uploaded %d items to dataset '%s'.", len(items), dataset_id
+            "Successfully uploaded {} items to dataset '{}'.".format(len(items), dataset_id)
         )
         return items
 
@@ -103,7 +108,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
         """
 
         self.logger.info(
-            "Updating table '%s' for item with ID '%s'.", table_name, item.id
+            "Updating table '{}' for item with ID '{}'.".format(table_name, item.id)
         )
 
         prompt_item = dl.PromptItem.from_item(item)
@@ -122,8 +127,8 @@ class SingleStoreBase(dl.BaseServiceRunner):
                 break
 
         if best_response is None:
-            self.logger.error("No best response found for item ID: %s", item.id)
-            raise ValueError(f"No best response found for item ID: {item.id}")
+            self.logger.error("No best response found for item ID: {}".format(item.id))
+            raise ValueError("No best response found for item ID: {}".format(item.id))
 
         db_config = {
             "host": host,
@@ -131,23 +136,26 @@ class SingleStoreBase(dl.BaseServiceRunner):
             "user": user,
             "password": os.environ.get("SINGLESTORE_PASSWORD"),
             "database": database,
+            "conn_attrs": {
+                "program_name": "SingleStore Integration",
+                "version": "0.0.6",
+                "provider": "Dataloop"
+            }
         }
-        with pymysql.connect(**db_config) as connection:
+        with s2.connect(**db_config) as connection:
             with connection.cursor() as cursor:
-                update_query = f"""
-                                UPDATE {table_name}
+                update_query = """
+                                UPDATE {}
                                 SET RESPONSE = %s
                                 WHERE id = %s
-                                """
+                                """.format(table_name)
                 cursor.execute(
                     update_query, (best_response, int(prompt_item.name[:-5]))
                 )
                 connection.commit()
 
         self.logger.info(
-            "Successfully updated table '%s' for item with ID '%s'.",
-            table_name,
-            item.id,
+            "Successfully updated table '{}' for item with ID '{}'.".format(table_name, item.id)
         )
 
         return item
