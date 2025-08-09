@@ -58,7 +58,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
             "database": database,
             "conn_attrs": {
                 "program_name": "SingleStore Integration",
-                "version": "0.0.8",
+                "version": "0.0.9",
                 "provider": "Dataloop"
             },
             'results_type': 'dict' 
@@ -138,7 +138,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
             "database": database,
             "conn_attrs": {
                 "program_name": "SingleStore Integration",
-                "version": "0.0.8",
+                "version": "0.0.9",
                 "provider": "Dataloop"
             }
         }
