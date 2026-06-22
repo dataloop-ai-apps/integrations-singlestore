@@ -26,13 +26,13 @@ class SingleStoreBase(dl.BaseServiceRunner):
         dataset_id: str,
     ):
         """
-        Fetches data from a SingleStore table and uploads it to a Dataloop dataset.
+        Fetches data from a SingleStore table and uploads it to a DDOE dataset.
 
         :param host: SingleStore host url.
         :param user: SingleStore username.
         :param database: SingleStore database name.
         :param table_name: SingleStore table name.
-        :param dataset_id: Dataloop dataset ID.
+        :param dataset_id: DDOE dataset ID.
         :return: List of uploaded PromptItems.
         """
 
@@ -59,7 +59,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
             "conn_attrs": {
                 "program_name": "SingleStore Integration",
                 "version": "0.0.9",
-                "provider": "Dataloop"
+                "provider": "DDOE"
             },
             'results_type': 'dict' 
         }
@@ -97,14 +97,14 @@ class SingleStoreBase(dl.BaseServiceRunner):
         table_name: str,
     ):
         """
-        Updates a SingleStore table with the best response from a Dataloop item.
+        Updates a SingleStore table with the best response from a DDOE item.
 
-        :param item: Dataloop item.
+        :param item: DDOE item.
         :param host: SingleStore host url.
         :param user: SingleStore username.
         :param database: SingleStore database name.
         :param table_name: SingleStore table name.
-        :return: The updated Dataloop item.
+        :return: The updated DDOE item.
         """
 
         self.logger.info(
@@ -139,7 +139,7 @@ class SingleStoreBase(dl.BaseServiceRunner):
             "conn_attrs": {
                 "program_name": "SingleStore Integration",
                 "version": "0.0.9",
-                "provider": "Dataloop"
+                "provider": "DDOE"
             }
         }
         with s2.connect(**db_config) as connection:

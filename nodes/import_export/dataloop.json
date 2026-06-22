@@ -1,7 +1,7 @@
 {
   "displayName": "SingleStore Integration",
   "name": "singlestore-integration",
-  "description": "SingleStore Integration for Dataloop",
+  "description": "SingleStore Integration for DDOE",
   "scope": "project",
   "version": "0.0.9",
   "attributes": {
@@ -28,7 +28,7 @@
         "name": "Import SingleStore",
         "categories": ["SingleStore"],
         "displayName": "Import SingleStore",
-        "description": "Import SingleStore Table into Dataloop",
+        "description": "Import SingleStore Table into DDOE",
         "scope": "project",
         "configuration": {
           "fields": [
@@ -61,7 +61,7 @@
         "name": "Export SingleStore",
         "categories": ["SingleStore"],
         "displayName": "Export SingleStore",
-        "description": "Export Dataloop Best Response to SingleStore",
+        "description": "Export DDOE Best Response to SingleStore",
         "scope": "project",
         "configuration": {
           "fields": [
